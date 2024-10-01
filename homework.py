@@ -26,13 +26,15 @@ HOMEWORK_VERDICTS = {
 
 logging.basicConfig(
     level=logging.DEBUG,
-    format="%(asctime)s, %(levelname)s, %(message)s, %(name)s",
 )
 
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler()
 logger.addHandler(handler)
-
+formatter = logging.Formatter(
+    "%(asctime)s, %(levelname)s, %(message)s, %(name)s"
+)
+handler.setFormatter(formatter)
 
 def check_tokens():
     """Проверка наличия токенов."""
