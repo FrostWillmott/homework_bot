@@ -24,17 +24,16 @@ HOMEWORK_VERDICTS = {
     "rejected": "Работа проверена: у ревьюера есть замечания.",
 }
 
-logging.basicConfig(
-    level=logging.DEBUG,
-)
-
+logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 handler = logging.StreamHandler()
 logger.addHandler(handler)
 formatter = logging.Formatter(
     "%(asctime)s, %(levelname)s, %(message)s, %(name)s"
 )
 handler.setFormatter(formatter)
+
 
 def check_tokens():
     """Проверка наличия токенов."""
