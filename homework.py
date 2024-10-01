@@ -1,5 +1,6 @@
 import logging
 import os
+import sys
 import time
 
 import requests
@@ -27,7 +28,7 @@ HOMEWORK_VERDICTS = {
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
-handler = logging.StreamHandler()
+handler = logging.StreamHandler(stream=sys.stdout)
 logger.addHandler(handler)
 formatter = logging.Formatter(
     "%(asctime)s, %(levelname)s, %(message)s, %(name)s"
