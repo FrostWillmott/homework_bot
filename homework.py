@@ -26,7 +26,6 @@ HOMEWORK_VERDICTS = {
 
 logging.basicConfig(
     level=logging.DEBUG,
-    filename="sys.stdout",
     format="%(asctime)s, %(levelname)s, %(message)s, %(name)s",
 )
 
