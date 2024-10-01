@@ -134,7 +134,7 @@ def main():
             if homeworks:
                 message = parse_status(homeworks[0])
                 send_message(bot, message)
-                timestamp = homeworks[0].get("date_updated")
+                timestamp = homework_response.get("current_date")
 
         except Exception as error:
             logging.error(f"Ошибка при запросе к основному API: {error}")

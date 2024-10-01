@@ -13,3 +13,9 @@
 2024-10-01 16:01:35,621, DEBUG, Starting new HTTPS connection (1): practicum.yandex.ru:443, urllib3.connectionpool
 2024-10-01 16:01:36,662, DEBUG, https://practicum.yandex.ru:443 "GET /api/user_api/homework_statuses/?from_date=1727787695 HTTP/1.1" 200 42, urllib3.connectionpool
 2024-10-01 16:01:36,665, DEBUG, Ответ от API: {'homeworks': [], 'current_date': 1727787696}, root
+2024-10-01 17:21:22,913, DEBUG, Starting new HTTPS connection (1): practicum.yandex.ru:443, urllib3.connectionpool
+2024-10-01 17:21:24,511, DEBUG, https://practicum.yandex.ru:443 "GET /api/user_api/homework_statuses/?from_date=1727792482 HTTP/1.1" 200 42, urllib3.connectionpool
+2024-10-01 17:21:24,513, DEBUG, Ответ от API: {'homeworks': [], 'current_date': 1727792484}, root
+2024-10-01 17:22:31,658, DEBUG, Starting new HTTPS connection (1): practicum.yandex.ru:443, urllib3.connectionpool
+2024-10-01 17:22:33,028, DEBUG, https://practicum.yandex.ru:443 "GET /api/user_api/homework_statuses/?from_date=1727792551 HTTP/1.1" 200 42, urllib3.connectionpool
+2024-10-01 17:22:33,030, DEBUG, Ответ от API: {'homeworks': [], 'current_date': 1727792553}, root
