@@ -65,10 +65,9 @@ def send_message(bot, message):
 
 def get_api_answer(timestamp):
     """Получение данных от API."""
-    payload = {"from_date": timestamp}
     try:
         homework_statuses = requests.get(
-            ENDPOINT, headers=HEADERS, params=payload
+            ENDPOINT, headers=HEADERS, params={"from_date": timestamp}
         )
         if homework_statuses.status_code != 200:
             logging.error(
