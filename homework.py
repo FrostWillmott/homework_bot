@@ -88,32 +88,39 @@ def get_api_answer(timestamp):
 def check_response(response):
     """Проверка ответа от API."""
     if not isinstance(response, dict):
-        logging.error("Ответ от API должен быть словарем")
-        raise TypeError("Ответ от API должен быть словарем")
+        error_message = "Ответ от API должен быть словарем"
+        logging.error(error_message)
+        raise TypeError(error_message)
     if not response:
-        logging.error("Ответ от API пустой")
-        raise ValueError("Ответ от API пустой")
+        error_message = "Ответ от API пустой"
+        logging.error(error_message)
+        raise ValueError(error_message)
     if "error" in response:
-        logging.error(f'Ошибка при запросе к API: {response["error"]}')
+        error_message = f'Ошибка при запросе к API: {response["error"]}'
+        logging.error(error_message)
         raise requests.exceptions.HTTPError(response["error"])
     if "homeworks" not in response or "current_date" not in response:
-        logging.error("Отсутствие ожидаемых ключей в ответе API")
-        raise KeyError("Отсутствие ожидаемых ключей в ответе API")
+        error_message = "Отсутствие ожидаемых ключей в ответе API"
+        logging.error(error_message)
+        raise KeyError(error_message)
     if not isinstance(response["homeworks"], list):
-        logging.error('Данные под ключом "homeworks" должны быть списком')
-        raise TypeError('Данные под ключом "homeworks" должны быть списком')
+        error_message = 'Данные под ключом "homeworks" должны быть списком'
+        logging.error(error_message)
+        raise TypeError(error_message)
 
 
 def parse_status(homework):
     """Парсинг статуса работы."""
     if "homework_name" not in homework:
-        logging.error('Отсутствие ключа "homework_name" в ответе API')
-        raise KeyError('Отсутствие ключа "homework_name" в ответе API')
+        error_message = 'Отсутствие ключа "homework_name" в ответе API'
+        logging.error(error_message)
+        raise KeyError(error_message)
     homework_name = homework.get("homework_name")
     status = homework.get("status")
     if status not in HOMEWORK_VERDICTS:
-        logging.error(f"Неожиданный статус домашней работы: {status}")
-        raise ValueError(f"Неожиданный статус домашней работы: {status}")
+        error_message = f"Неожиданный статус домашней работы: {status}"
+        logging.error(error_message)
+        raise ValueError(error_message)
     verdict = HOMEWORK_VERDICTS.get(homework.get("status"))
     return f'Изменился статус проверки работы "{homework_name}". {verdict}'
 
@@ -129,10 +136,16 @@ def main():
     while True:
         try:
             homework_response = get_api_answer(timestamp)
-            check_response(homework_response)
+            if isinstance(homework_response, (AssertionError, RuntimeError)):
+                send_message(bot, str(homework_response))
+            check_results = check_response(homework_response)
+            if isinstance(check_results, (TypeError, ValueError, KeyError)):
+                send_message(bot, str(check_results))
             homeworks = homework_response.get("homeworks", [])
             if homeworks:
                 message = parse_status(homeworks[0])
+                if isinstance(message, (ValueError, KeyError)):
+                    send_message(bot, str(message))
                 send_message(bot, message)
                 timestamp = homework_response.get("current_date")
 

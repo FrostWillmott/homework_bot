@@ -19,3 +19,13 @@
 2024-10-01 17:22:31,658, DEBUG, Starting new HTTPS connection (1): practicum.yandex.ru:443, urllib3.connectionpool
 2024-10-01 17:22:33,028, DEBUG, https://practicum.yandex.ru:443 "GET /api/user_api/homework_statuses/?from_date=1727792551 HTTP/1.1" 200 42, urllib3.connectionpool
 2024-10-01 17:22:33,030, DEBUG, Ответ от API: {'homeworks': [], 'current_date': 1727792553}, root
+2024-10-01 17:41:10,070, DEBUG, Starting new HTTPS connection (1): practicum.yandex.ru:443, urllib3.connectionpool
+2024-10-01 17:41:10,875, DEBUG, https://practicum.yandex.ru:443 "GET /api/user_api/homework_statuses/?from_date=1727793670 HTTP/1.1" 200 42, urllib3.connectionpool
+2024-10-01 17:41:10,876, DEBUG, Ответ от API: {'homeworks': [], 'current_date': 1727793670}, root
+2024-10-01 17:41:10,877, ERROR, Ошибка при запросе к основному API: check_response() missing 1 required positional argument: 'response', root
+2024-10-01 17:42:05,384, DEBUG, Starting new HTTPS connection (1): practicum.yandex.ru:443, urllib3.connectionpool
+2024-10-01 17:42:05,967, DEBUG, https://practicum.yandex.ru:443 "GET /api/user_api/homework_statuses/?from_date=1727793725 HTTP/1.1" 200 42, urllib3.connectionpool
+2024-10-01 17:42:05,968, DEBUG, Ответ от API: {'homeworks': [], 'current_date': 1727793726}, root
+2024-10-01 18:04:27,368, DEBUG, Starting new HTTPS connection (1): practicum.yandex.ru:443, urllib3.connectionpool
+2024-10-01 18:04:29,321, DEBUG, https://practicum.yandex.ru:443 "GET /api/user_api/homework_statuses/?from_date=1727795067 HTTP/1.1" 200 42, urllib3.connectionpool
+2024-10-01 18:04:29,323, DEBUG, Ответ от API: {'homeworks': [], 'current_date': 1727795069}, root
