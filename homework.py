@@ -39,17 +39,20 @@ def check_tokens():
     """Проверка наличия токенов."""
     if not PRACTICUM_TOKEN:
         logging.critical(
-            "Отсутствие обязательных переменных окружения во время запуска бота: PRACTICUM_TOKEN"
+            "Отсутствие обязательных переменных окружения"
+            " во время запуска бота: PRACTICUM_TOKEN"
         )
         raise ValueError("Не указан токен Яндекс.Практикум")
     if not TELEGRAM_TOKEN:
         logging.critical(
-            "Отсутствие обязательных переменных окружения во время запуска бота: TELEGRAM_TOKEN"
+            "Отсутствие обязательных переменных окружения"
+            " во время запуска бота: TELEGRAM_TOKEN"
         )
         raise ValueError("Не указан токен Телеграм")
     if not TELEGRAM_CHAT_ID:
         logging.critical(
-            "Отсутствие обязательных переменных окружения во время запуска бота: TELEGRAM_CHAT_ID"
+            "Отсутствие обязательных переменных окружения"
+            " во время запуска бота: TELEGRAM_CHAT_ID"
         )
         raise ValueError("Не указан ID чата Телеграм")
 
@@ -69,10 +72,12 @@ def get_api_answer(timestamp):
         )
         if homework_statuses.status_code != 200:
             logging.error(
-                f"Эндпоинт {ENDPOINT} недоступен. Код ответа: {homework_statuses.status_code}"
+                f"Эндпоинт {ENDPOINT} недоступен."
+                f" Код ответа: {homework_statuses.status_code}"
             )
             raise AssertionError(
-                f"Эндпоинт {ENDPOINT} недоступен. Код ответа: {homework_statuses.status_code}"
+                f"Эндпоинт {ENDPOINT} недоступен."
+                f" Код ответа: {homework_statuses.status_code}"
             )
         logging.debug(f"Ответ от API: {homework_statuses.json()}")
         return homework_statuses.json()
