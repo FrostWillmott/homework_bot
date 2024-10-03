@@ -138,7 +138,7 @@ def main():
             logging.error(error_message)
             if error_message != last_error_message:
                 try:
-                    send_message(bot, f"Возникла ошибка: {error}")
+                    send_message(bot, error_message)
                     last_error_message = error_message
                 except RuntimeError as error:
                     logging.error(
