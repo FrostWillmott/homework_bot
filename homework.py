@@ -87,7 +87,10 @@ def check_response(response):
         error_message = "Отсутствие ожидаемых ключей в ответе API"
         raise KeyError(error_message)
     if not isinstance(response["homeworks"], list):
-        error_message = f'Данные под ключом "homeworks" должны быть списком, получен тип: {type(response)}'
+        error_message = (
+            f'Данные под ключом "homeworks" должны быть списком,'
+            f" получен тип: {type(response)}"
+        )
         raise TypeError(error_message)
     logging.debug("Проверка ответа от API пройдена успешно")
 
@@ -149,7 +152,8 @@ def main():
 if __name__ == "__main__":
     logging.basicConfig(
         level=logging.DEBUG,
-        format="%(asctime)s, %(levelname)s, %(message)s, %(name)s, %(funcName)s, %(lineno)d",
+        format="%(asctime)s, %(levelname)s, %(message)s,"
+        " %(name)s, %(funcName)s, %(lineno)d",
     )
     logger = logging.getLogger(__name__)
     handler = logging.StreamHandler(stream=sys.stdout)
