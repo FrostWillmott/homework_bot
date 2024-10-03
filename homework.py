@@ -137,14 +137,8 @@ def main():
             error_message = f"Возникла ошибка: {error}"
             logging.error(error_message)
             if error_message != last_error_message:
-                try:
-                    send_message(bot, error_message)
-                    last_error_message = error_message
-                except RuntimeError as error:
-                    logging.error(
-                        f"Ошибка при отправке сообщения в Telegram: {error}",
-                        exc_info=True,
-                    )
+                send_message(bot, error_message)
+                last_error_message = error_message
         finally:
             time.sleep(RETRY_PERIOD)
 
