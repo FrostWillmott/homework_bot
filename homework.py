@@ -29,10 +29,12 @@ def check_tokens():
     """Проверка наличия токенов."""
     source = ("PRACTICUM_TOKEN", "TELEGRAM_TOKEN", "TELEGRAM_CHAT_ID")
     absent_tokens = [token for token in source if not globals().get(token)]
-    for token in absent_tokens:
-        logging.critical(f"Отсутствие обязательных переменных окружения"
-                         f" во время запуска бота: {token}")
-        raise ValueError(f"Не указан(ы) токен(ы) {token}")
+    if not absent_tokens:
+        logging.debug("Проверка наличия токенов пройдена успешно")
+    else:
+        logging.critical("Отсутствие обязательных переменных окружения"
+                             f" во время запуска бота: {absent_tokens}")
+        sys.exit(1)
 
 
 def send_message(bot, message):
@@ -42,7 +44,7 @@ def send_message(bot, message):
         bot.send_message(chat_id=TELEGRAM_CHAT_ID, text=message)
         logging.debug(f"Сообщение отправлено в Telegram: {message}")
     except (apihelper.ApiException, requests.RequestException) as error:
-        raise RuntimeError(
+        logging.error(
             f"Ошибка при отправке сообщения в Telegram: {error}"
         )
 
@@ -75,13 +77,13 @@ def check_response(response):
     logging.debug(f"Проверка ответа от API: {response}")
     if not isinstance(response, dict):
         raise TypeError(f"Ответ от API должен быть словарем,"
-                        f" получен тип: {type(response['homeworks'])}")
+                        f" получен тип: {type(response)}")
     if "homeworks" not in response:
         raise KeyError('Отсутствие ключа "homeworks" в ответе API')
     if not isinstance(response["homeworks"], list):
         raise TypeError(
             'Данные под ключом "homeworks" должны быть списком,'
-            f" получен тип: {type(response)}"
+            f" получен тип: {type(response['homeworks'])}"
         )
     logging.debug("Проверка ответа от API пройдена успешно")
 
@@ -107,7 +109,7 @@ def main():
     check_tokens()
     bot = TeleBot(token=TELEGRAM_TOKEN)
     timestamp = int(time.time())
-    # last_error_message = None
+    last_error_message = None
 
     while True:
         try:
@@ -126,14 +128,8 @@ def main():
             error_message = f"Возникла ошибка: {error}"
             logging.error(error_message)
             if error_message != last_error_message:
-                try:
                     send_message(bot, error_message)
                     last_error_message = error_message
-                except RuntimeError as error:
-                    logging.error(
-                        f"Ошибка при отправке сообщения в Telegram: {error}",
-                        exc_info=True
-                    )
         finally:
             time.sleep(RETRY_PERIOD)
 
