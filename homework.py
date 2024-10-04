@@ -33,7 +33,7 @@ def check_tokens():
         logging.debug("Проверка наличия токенов пройдена успешно")
     else:
         logging.critical("Отсутствие обязательных переменных окружения"
-            f" во время запуска бота: {absent_tokens}")
+                         f" во время запуска бота: {absent_tokens}")
         sys.exit(1)
 
 
