@@ -74,7 +74,8 @@ def check_response(response):
     """Проверка ответа от API."""
     logging.debug(f"Проверка ответа от API: {response}")
     if not isinstance(response, dict):
-        raise TypeError(f"Ответ от API должен быть словарем, получен тип: {type(response['homeworks'])}")
+        raise TypeError(f"Ответ от API должен быть словарем,"
+                        f" получен тип: {type(response['homeworks'])}")
     if "homeworks" not in response:
         raise KeyError('Отсутствие ключа "homeworks" в ответе API')
     if not isinstance(response["homeworks"], list):
