@@ -33,7 +33,7 @@ def check_tokens():
         logging.debug("Проверка наличия токенов пройдена успешно")
     else:
         logging.critical("Отсутствие обязательных переменных окружения"
-                             f" во время запуска бота: {absent_tokens}")
+            f" во время запуска бота: {absent_tokens}")
         sys.exit(1)
 
 
@@ -128,8 +128,8 @@ def main():
             error_message = f"Возникла ошибка: {error}"
             logging.error(error_message)
             if error_message != last_error_message:
-                    send_message(bot, error_message)
-                    last_error_message = error_message
+                send_message(bot, error_message)
+                last_error_message = error_message
         finally:
             time.sleep(RETRY_PERIOD)
 
